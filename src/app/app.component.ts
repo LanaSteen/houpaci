@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeServiceService } from './theme-service.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'houpaci_new_1';
+  isDarkMode?: boolean;
+  constructor(private themeService: ThemeServiceService){
+    this.themeService.darkMode$.subscribe((darkMode) => {
+      this.isDarkMode = darkMode;
+    });
+  }
+  title = 'HOUPACI';
+  toggleMode() {
+    this.themeService.toggleDarkMode();
+  }
 }
